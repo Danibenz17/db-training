@@ -1,16 +1,17 @@
-def binary_search(arr, num, initial=0, last=arr.length-1)
+def binary_search(students, name, initial = 0, last = students.length - 1)
   if initial > last
     return -1
   end
   mid = (initial + last) / 2
-  if arr[mid] == num
-     mid
-  elsif arr[mid] < num
-    initial = mid+1
-    binary_search(arr, num, initial, last)
+  case name <=> students[mid]
+  when 1
+    initial = mid + 1
+    binary_search(students, name, initial, last)
+  when -1
+    last = mid - 1
+    binary_search(students, name, initial, last)
   else
-    last = mid-1
-    binary_search(arr, num, initial, last)
+    return mid
   end
 end
 
@@ -37,4 +38,35 @@ end
   end
 end
 
-puts "Binary Search Works!!!"
+puts "Binary Search Works For Numbers!!!"
+
+students = ["abi", "anish", "benson", "jack", "karthik", "rathish", "sam", "shree" "varun", "varshini"]
+
+students.each_with_index do |name, i|
+  if(i != binary_search(students, name))
+    raise "Error: Failed to correctly find #{name}"
+  end
+end
+
+students.each_with_index do |name, i|
+  if(i != binary_search(students, name))
+    raise "Error: Failed to correctly find #{name}"
+  end
+end
+
+# out of range
+['aarthi', 'zahir'].each do |name|
+  if(-1 != binary_search(students, name))
+    raise "Error: Did not return -1 for number #{name}"
+  end
+end
+
+
+# In Range, non-existent
+['sathish', 'hari'].each do |name|
+  if(-1 != binary_search(students, name))
+    raise "Error: Did not return -1 for number #{name}"
+  end
+end
+
+puts "Binary Search Works For Strings!!!"
