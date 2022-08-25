@@ -5,6 +5,7 @@ def read_file()
 end
 
 
+
 def binary_search(arr, number)
   initial = 0
   last = arr.length - 1
